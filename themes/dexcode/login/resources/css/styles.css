@@ -1,15 +1,27 @@
 body {
-  background-color: #050816;
+  background-color: #030712;
   color: #f9fafb;
   font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 .login-pf body {
-  background-color: #050816;
+  background-color: #030712;
 }
 
 .login-pf-page {
   max-width: 420px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-pf-page .card-pf,
+.pf-c-login__main,
+.pf-c-card {
+  background-color: #111827;
+  color: #f9fafb;
 }
 
 .kc-logo-text {
