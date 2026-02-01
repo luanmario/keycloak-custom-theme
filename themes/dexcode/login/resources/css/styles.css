@@ -1,14 +1,19 @@
+html,
 body {
-  background-color: #030712;
+  background-color: #030712 !important;
+  background-image: none !important;
   color: #f9fafb;
   font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
-.login-pf body {
-  background-color: #030712;
+.login-pf,
+.pf-c-login {
+  background-color: #030712 !important;
+  background-image: none !important;
 }
 
-.login-pf-page {
+.login-pf-page,
+.pf-c-login {
   max-width: 420px;
   margin: 0 auto;
   min-height: 100vh;
