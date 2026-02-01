@@ -1,0 +1,44 @@
+body {
+  background-color: #050816;
+  color: #f9fafb;
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.login-pf body {
+  background-color: #050816;
+}
+
+.login-pf-page {
+  max-width: 420px;
+}
+
+.kc-logo-text {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: #22c55e;
+  border-color: #22c55e;
+}
+
+.btn-primary:hover {
+  background-color: #16a34a;
+  border-color: #16a34a;
+}
+
+.pf-c-button.pf-m-secondary {
+  color: #22c55e;
+  border-color: #22c55e;
+}
+
+.pf-c-button.pf-m-secondary:hover {
+  color: #16a34a;
+  border-color: #16a34a;
+}
+
+.alert-error,
+.pf-c-alert.pf-m-danger {
+  background-color: #450a0a;
+  color: #fee2e2;
+}
