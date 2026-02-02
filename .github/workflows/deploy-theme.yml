@@ -1,0 +1,62 @@
+name: Deploy Theme to Keycloak
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Sync Files to Server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SERVER_PORT || '22' }}
+          # Copia TODO o repositório para a pasta ~/tema-keycloak no servidor
+          source: "."
+          target: "tema-keycloak"
+          # rm: true # Descomente se quiser limpar a pasta de destino antes de copiar
+
+      - name: Update Keycloak Theme
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SERVER_PORT || '22' }}
+          script: |
+            # 1. Encontrar o Container ID dinamicamente (mais seguro que fixo)
+            # Procura por um container que contenha 'keycloak' no nome
+            CONTAINER_ID=$(docker ps -q -f name=keycloak | head -n 1)
+            
+            if [ -z "$CONTAINER_ID" ]; then
+              echo "Erro: Container do Keycloak não encontrado."
+              exit 1
+            fi
+            
+            echo "Container Keycloak encontrado: $CONTAINER_ID"
+            
+            # 2. Executar o comando de cópia solicitado
+            # Copia a pasta 'dexcode' de dentro de 'themes' no servidor para o container
+            
+            # Primeiro, garantimos que o diretório pai existe no container (por precaução)
+            # docker exec $CONTAINER_ID mkdir -p /opt/keycloak/themes
+            
+            echo "Copiando tema dexcode para o container..."
+            # O comando abaixo copia a pasta 'dexcode' para dentro de '/opt/keycloak/themes/'
+            # Resultando em: /opt/keycloak/themes/dexcode
+            docker cp ~/tema-keycloak/themes/dexcode $CONTAINER_ID:/opt/keycloak/themes/
+            
+            # 3. Ajustar permissões (usuário keycloak padrão é 1000)
+            echo "Ajustando permissões..."
+            docker exec -u 0 $CONTAINER_ID chown -R 1000:0 /opt/keycloak/themes/dexcode
+            
+            echo "Deploy finalizado com sucesso!"
