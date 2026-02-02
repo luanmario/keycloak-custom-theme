@@ -33,21 +33,39 @@ body {
   padding: 0 !important;
 }
 
-#kc-header-wrapper {
-    display: block !important;
-    font-size: 0 !important; /* Esconde o texto do Realm */
-    background-image: url('../img/logo.png') !important;
-    background-size: contain !important;
+/* 1. Alvo direto no container de logo do Keycloak 26 */
+#kc-logo-wrapper {
+    background-image: url(../img/logo.png) !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
-    height: 80px !important;
+    background-size: contain !important;
+    display: block !important;
+    min-height: 80px !important; /* Altura mínima para forçar a visibilidade */
     width: 100% !important;
     margin-bottom: 20px !important;
 }
 
-/* Garante que nenhum outro texto de logo apareça */
-.kc-logo-text, .pf-c-brand {
-    display: none !important;
+/* 2. Remove o texto do Realm que pode estar ocupando o espaço */
+#kc-header-wrapper {
+    font-size: 0 !important;
+    line-height: 0 !important;
+    color: transparent !important;
+}
+
+/* 3. Seletor alternativo caso o acima falhe (comum em novos layouts) */
+.pf-c-login__header-main {
+    background-image: url(../img/logo.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
+    height: 80px !important;
+    display: block !important;
+}
+
+/* 4. Esconde o texto H1 padrão se ele existir */
+#kc-page-title, .pf-c-title {
+    /* Mantenha isso apenas se quiser esconder o título "Entrar na sua conta" 
+       ou o nome do Realm que aparece no topo */
 }
 
 /* Ensure container centers properly */
