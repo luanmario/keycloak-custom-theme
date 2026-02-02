@@ -26,20 +26,20 @@ jobs:
               echo "🧹 Limpando pasta tema-keycloak"
               rm -rf ~/tema-keycloak
               mkdir -p ~/tema-keycloak
-
+              
               echo "⬇️ Clonando branch main"
               cd ~
               git clone -b main https://github.com/luanmario/keycloak-custom-theme.git tema-keycloak
-
+              
               echo "📦 Copiando tema para container do Keycloak"
               docker cp \
                 ~/tema-keycloak/themes/dexcode \
                 keycloak-yswkooow0ck448kss04o0wcg:/opt/keycloak/themes
-
-              echo "🔐 Ajustando permissões"
-              docker exec keycloak-yswkooow0ck448kss04o0wcg \
+              
+              echo "🔐 Ajustando permissões (como root)"
+              docker exec -u 0 keycloak-yswkooow0ck448kss04o0wcg \
                 chown -R 1000:1000 /opt/keycloak/themes/dexcode
-
+              
               echo "♻️ Reiniciando Keycloak"
               docker restart keycloak-yswkooow0ck448kss04o0wcg
 
