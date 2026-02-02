@@ -75,12 +75,13 @@ body {
   margin-right: auto;
 }
 
-/* Inputs arredondados */
+/* Inputs arredondados - REMOVIDO */
 .pf-c-form-control,
 input.form-control,
 input[type="text"],
 input[type="password"],
 input[type="email"] {
+  border-radius: 4px !important; /* Voltando para um leve arredondamento padrão */
   background-color: #1f2937 !important;
   border-color: #374151 !important;
   color: #f9fafb !important;
