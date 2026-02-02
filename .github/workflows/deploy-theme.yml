@@ -13,37 +13,35 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
 
       - name: Deploy theme to VPS and Keycloak container
         run: |
-          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
-            set -e
+          sshpass -p "${{ secrets.VPS_PASSWORD }}" ssh \
+            -o StrictHostKeyChecking=no \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+              set -e
 
-            echo "🧹 Limpando pasta tema-keycloak"
-            rm -rf ~/tema-keycloak/*
-            mkdir -p ~/tema-keycloak
+              echo "🧹 Limpando pasta tema-keycloak"
+              rm -rf ~/tema-keycloak
+              mkdir -p ~/tema-keycloak
 
-            echo "⬇️ Clonando branch main"
-            cd ~
-            git clone -b main https://github.com/SEU_USUARIO/SEU_REPO.git tema-keycloak
+              echo "⬇️ Clonando branch main"
+              cd ~
+              git clone -b main https://github.com/SEU_USUARIO/SEU_REPO.git tema-keycloak
 
-            echo "📦 Copiando tema para container do Keycloak"
-            docker cp \
-              ~/tema-keycloak/themes/dexcode \
-              keycloak-yswkooow0ck448kss04o0wcg:/opt/keycloak/themes
+              echo "📦 Copiando tema para container do Keycloak"
+              docker cp \
+                ~/tema-keycloak/themes/dexcode \
+                keycloak-yswkooow0ck448kss04o0wcg:/opt/keycloak/themes
 
-            echo "🔐 Ajustando permissões"
-            docker exec keycloak-yswkooow0ck448kss04o0wcg \
-              chown -R 1000:1000 /opt/keycloak/themes/dexcode
+              echo "🔐 Ajustando permissões"
+              docker exec keycloak-yswkooow0ck448kss04o0wcg \
+                chown -R 1000:1000 /opt/keycloak/themes/dexcode
 
-            echo "♻️ Reiniciando Keycloak"
-            docker restart keycloak-yswkooow0ck448kss04o0wcg
+              echo "♻️ Reiniciando Keycloak"
+              docker restart keycloak-yswkooow0ck448kss04o0wcg
 
-            echo "✅ Deploy finalizado com sucesso"
+              echo "✅ Deploy finalizado com sucesso"
           EOF
