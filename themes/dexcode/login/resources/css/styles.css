@@ -33,20 +33,20 @@ body {
   padding: 0 !important;
 }
 
-/* Alvo principal para a logo no Keycloak moderno */
-.pf-c-login__header {
+#kc-header-wrapper {
+    display: block !important;
+    font-size: 0 !important; /* Esconde o texto do Realm */
     background-image: url('../img/logo.png') !important;
+    background-size: contain !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
-    background-size: contain !important;
-    height: 100px !important; /* Altura mínima para a logo aparecer */
+    height: 80px !important;
+    width: 100% !important;
     margin-bottom: 20px !important;
-    display: block !important;
 }
 
-/* Garante que o texto antigo não empurre a logo ou ocupe espaço */
-#kc-header-wrapper, 
-.kc-logo-text {
+/* Garante que nenhum outro texto de logo apareça */
+.kc-logo-text, .pf-c-brand {
     display: none !important;
 }
 
