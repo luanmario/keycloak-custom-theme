@@ -62,14 +62,14 @@ body {
   font-weight: 600;
   margin-bottom: 24px;
   text-align: center;
-  background-image: url('../img/DEXCODE_LOGO.png');
+  background-image: url('https://i.ibb.co/nqHRN0m1/DEXCODE-LOGO.png'); /* Logo externa */
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  height: 80px; /* Altura ajustada para logo */
-  width: 200px; /* Largura ajustada para logo */
-  color: transparent; /* Esconde o texto */
-  text-indent: -9999px; /* Garante que o texto suma */
+  height: 80px;
+  width: 250px; /* Levemente mais largo para garantir que a logo caiba */
+  color: transparent;
+  text-indent: -9999px;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -81,7 +81,6 @@ input.form-control,
 input[type="text"],
 input[type="password"],
 input[type="email"] {
-  border-radius: 30px !important;
   background-color: #1f2937 !important;
   border-color: #374151 !important;
   color: #f9fafb !important;
