@@ -4,6 +4,16 @@ body {
   background-image: none !important;
   color: #f9fafb;
   font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Remove default PatternFly background image */
+.pf-c-background-image {
+  display: none !important;
+  visibility: hidden !important;
+  background: none !important;
 }
 
 .login-pf,
@@ -19,6 +29,19 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
+  padding: 0 !important;
+}
+
+/* Ensure container centers properly */
+.pf-c-login__container {
+  width: 100%;
+  max-width: 450px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .login-pf-page .card-pf,
@@ -26,7 +49,6 @@ body {
 .pf-c-card {
   background-color: #111827;
   color: #f9fafb;
-  max-width: 420px;
   width: 100%;
 }
 
