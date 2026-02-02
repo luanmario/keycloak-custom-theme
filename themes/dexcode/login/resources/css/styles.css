@@ -62,6 +62,7 @@ body {
   font-weight: 600;
   margin-bottom: 24px;
   text-align: center;
+  background-image: url('../img/logo.png') !important; /* Caminho relativo local */
   background-repeat: no-repeat !important;
   background-position: center !important;
   background-size: contain !important;
@@ -86,7 +87,7 @@ body {
 .pf-c-input-group > .pf-c-form-control,
 .pf-c-input-group > .pf-c-button {
   border: none !important;
-  border-radius: 0 !important;
+  border-radius: 4px !important;
   background-color: transparent !important;
 }
 
