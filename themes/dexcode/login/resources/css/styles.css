@@ -63,6 +63,25 @@ body {
   align-items: center;
 }
 
+/* O Header Wrapper é onde o texto do realm fica por padrão. 
+   Vamos usá-lo para mostrar a logo. */
+#kc-header-wrapper {
+    display: block !important;
+    font-size: 0 !important; /* Esconde o texto do Realm */
+    background-image: url('../img/logo.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    height: 100px !important; /* Altura garantida */
+    width: 250px !important; /* Largura garantida */
+    margin-bottom: 20px !important;
+}
+
+/* Garante que nenhum outro texto de logo apareça duplicado */
+.kc-logo-text, .pf-c-brand {
+    display: none !important;
+}
+
 .login-pf-page .card-pf,
 .pf-c-login__main,
 .pf-c-card {
